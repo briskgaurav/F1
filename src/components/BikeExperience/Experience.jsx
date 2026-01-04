@@ -15,7 +15,7 @@ import * as THREE from "three";
 
 export default function Experience() {
   return (
-    <div className="fixed inset-0 w-screen h-screen bg-black">
+    <div className="fixed inset-0 w-screen h-screen bg-[#ecedef]">
       <Canvas>
         <fog attach="fog" args={["#ecedef", 5, 10]} />
         <Stats />
@@ -24,7 +24,7 @@ export default function Experience() {
         <Center>
           <Model />
           <mesh rotation-x={-Math.PI / 2}>
-            <planeGeometry args={[100, 10]} />
+            <planeGeometry args={[100, 40]} />
             <MeshReflectorMaterial
               side={THREE.DoubleSide}
               blur={[300, 100]}
@@ -45,7 +45,7 @@ export default function Experience() {
           <planeGeometry args={[10, 10]} />
           <meshBasicMaterial color="black" />
         </mesh>
-        <OrbitControls />
+        {/* <OrbitControls /> */}
       </Canvas>
     </div>
   );
