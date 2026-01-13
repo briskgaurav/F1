@@ -59,7 +59,7 @@ export default function Chapter1() {
   return (
     <div className="fixed inset-0 w-full h-screen bg-background flex items-center justify-center">
       <Canvas
-        style={{ width: dimensions.width, height: dimensions.height }}
+        // style={{ width: dimensions.width, height: dimensions.height }}
         gl={{ preserveDrawingBuffer: true }}
         camera={{ near: 0.1, far: 1000, fov: 50, position: [0, 1.5, 5] }}
         resize={{ scroll: false, debounce: { scroll: 50, resize: 0 } }}
@@ -67,18 +67,23 @@ export default function Chapter1() {
         <SheetProvider sheet={sheet}>
           {/* <Stage adjustCamera={false} environment="studio" environmentIntensity={0.5} /> */}
           <Environment preset="studio" environmentIntensity={0.5} />
-          <ContactShadows
+          {/* <ContactShadows
             position-y={-0.99}
             opacity={0.5}
             scale={20}
             blur={2}
-          />
+          /> */}
 
           <Center>
             <e.group theatreKey="Chapter1Model">
               <Model />
             </e.group>
           </Center>
+
+          <mesh position-y={-0.99} rotation-x={-Math.PI / 2}>
+            <planeGeometry args={[10, 100]} />
+            <meshStandardMaterial color="red" />
+          </mesh>
 
           {/* <OrbitControls /> */}
         </SheetProvider>
