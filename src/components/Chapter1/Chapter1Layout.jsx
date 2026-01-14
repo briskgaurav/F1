@@ -121,7 +121,7 @@ export default function Chapter1Layout() {
       {/* First text */}
       <h1
         ref={firstRef}
-        className="bigtext tracking-tighter text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none normal-case will-change-transform"
+        className="bigtext tracking-tighter text-left absolute top-[30%] left-[22%] -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none normal-case will-change-transform"
       >
         The Physics <br /> Behind Speed
       </h1>

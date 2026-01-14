@@ -34,7 +34,7 @@ export function Model(props) {
   const { nodes, materials } = useGLTF('model/partsTogether.glb')
 
   return (
-    <group scale={0.01} {...props} rotation={[degToRad(0), degToRad(120), degToRad(0)]} dispose={null}>
+    <group scale={0.014}  {...props} rotation={[degToRad(90), degToRad(90), degToRad(0)]} dispose={null}>
       <group position={[0, 60.041, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={100}>
         <mesh
           castShadow

@@ -167,12 +167,12 @@ export default function Chapter1() {
           alpha: true,
           powerPreference: "high-performance",
         }}
-        dpr={[1, 2]}
+        dpr={[1, 1]}
         camera={{
           near: 0.1,
           far: 100,
           fov: 45,
-          position: [0, 1.5, 5],
+          position: [0, 0, 5],
         }}
         resize={{ scroll: false, debounce: { scroll: 50, resize: 0 } }}
       >
@@ -196,9 +196,9 @@ export default function Chapter1() {
           floatIntensity={0.3}
           floatingRange={[-0.05, 0.05]}
         > */}
-          <Center>
-            <Model />
-          </Center>
+        <group position={[3, 0, 0]}>
+          <Model />
+        </group>
         {/* </Float> */}
 
         {/* Particle effects */}
@@ -219,7 +219,7 @@ export default function Chapter1() {
         <EffectComposer>
           <Bloom
             intensity={0.8}
-            luminanceThreshold={0.}
+            luminanceThreshold={0}
             luminanceSmoothing={0.9}
             mipmapBlur
           />
@@ -236,14 +236,7 @@ export default function Chapter1() {
           />
         </EffectComposer>
 
-        {/* <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          autoRotate
-          autoRotateSpeed={0.9}
-          minPolarAngle={Math.PI / 3}
-          maxPolarAngle={Math.PI / 1.8}
-        /> */}
+        <OrbitControls enableZoom={false} enablePan={false} />
       </Canvas>
     </div>
   );
