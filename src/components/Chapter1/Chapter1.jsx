@@ -30,6 +30,7 @@ import {
 } from "@react-three/postprocessing";
 import { BlendFunction, GlitchMode } from "postprocessing";
 import * as THREE from "three";
+import LightTrail from "../LightTrail/LightTrail";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -196,6 +197,8 @@ export default function Chapter1() {
             />
           </EffectComposer>
         </Suspense>
+
+        <LightTrail />
 
         <OrbitControls enableZoom={false} enablePan={false} />
       </Canvas>

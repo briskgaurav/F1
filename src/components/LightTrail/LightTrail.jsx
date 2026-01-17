@@ -4,6 +4,10 @@ import React, { useRef, useMemo, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useControls } from 'leva';
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
+
 
 const vertexShader = `
   varying vec2 vUv;
@@ -265,7 +269,7 @@ export default function LightTrail({
         uPrevMouse: { value: new THREE.Vector2(0.5, 0.5) },
         uTime: { value: 0 },
         uColor1: { value: tintColor },
-        uColor2: { value: new THREE.Color(0xff00ff) },
+        uColor2: { value: new THREE.Color(0xfffffff) },
         uColorMix: { value: colorMix },
         uVelocity: { value: 0 },
         uDecay: { value: decay },
