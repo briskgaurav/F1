@@ -102,7 +102,6 @@ function GradientBackground() {
   );
 }
 
-
 export default function Chapter1() {
   const dimensions = useAspectRatioDimensions(ASPECT_RATIO);
 
@@ -120,88 +119,102 @@ export default function Chapter1() {
   }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-screen bg-black flex items-center justify-center overflow-hidden">
-      <Canvas
-        flat
-        gl={{
-          preserveDrawingBuffer: false,
-          antialias: true,
-          alpha: true,
-          powerPreference: "high-performance",
-        }}
-        dpr={1}
-        camera={{
-          near: 0.1,
-          far: 100,
-          fov: 45,
-          position: [0, 0, 5],
-        }}
-        resize={{ scroll: false, debounce: { scroll: 50, resize: 0 } }}
-      >
-        <Float
-          speed={1.5}
-          rotationIntensity={0.1}
-          floatIntensity={0.3}
-          floatingRange={[-0.05, 0.05]}
+    <>
+      <div className="fixed inset-0 w-full h-screen bg-black flex items-center justify-center overflow-hidden">
+        <Canvas
+          camera={{
+            near: 0.1,
+            far: 100,
+            fov: 45,
+            position: [0, 0, 5],
+          }}
         >
-          <Center>
-            <group
-              position={[0, 0, 0]}
-              scale={0.6}
-              rotation={[-degToRad(30), -degToRad(20), degToRad(30)]}
-            >
-              <Model />
-            </group>
-          </Center>
-        </Float>
+          <Stats />
+          <LightTrail />
+        </Canvas>
+      </div>
 
-        <Text
-          // font="/fonts/helvetiker_regular.typeface.json"
-          size={0.5}
-          height={0.1}
-          curveSegments={12}
-          bevelEnabled
-          bevelThickness={0.02}
-          letterSpacing={-0.09}
-          bevelSize={0.02}
-          bevelOffset={0}
-          bevelSegments={5}
-          position={[0, 0, 0]}
+      <div className="fixed inset-0 w-full h-screen  flex items-center justify-center overflow-hidden">
+        <Canvas
+          flat
+          gl={{
+            preserveDrawingBuffer: false,
+            antialias: true,
+            alpha: true,
+            powerPreference: "high-performance",
+          }}
+          dpr={1}
+          camera={{
+            near: 0.1,
+            far: 100,
+            fov: 45,
+            position: [0, 0, 5],
+          }}
+          resize={{ scroll: false, debounce: { scroll: 50, resize: 0 } }}
         >
-          LIMITLESS
-          <meshStandardMaterial color="orangered" />
-        </Text>
+          <Float
+            speed={1.5}
+            rotationIntensity={0.1}
+            floatIntensity={0.3}
+            floatingRange={[-0.05, 0.05]}
+          >
+            <Center>
+              <group
+                position={[0, 0, 0]}
+                scale={0.6}
+                rotation={[-degToRad(30), -degToRad(20), degToRad(30)]}
+              >
+                <Model />
+              </group>
+            </Center>
+          </Float>
 
-        <Environment preset="sunset" />
+          <Text
+            // font="/fonts/helvetiker_regular.typeface.json"
+            size={0.5}
+            height={0.1}
+            curveSegments={12}
+            bevelEnabled
+            bevelThickness={0.02}
+            letterSpacing={-0.09}
+            bevelSize={0.02}
+            bevelOffset={0}
+            bevelSegments={5}
+            position={[0, 0, 0]}
+          >
+            LIMITLESS
+            <meshStandardMaterial color="orangered" />
+          </Text>
 
-        <Stats />
+          <Environment preset="sunset" />
 
-        <Suspense fallback={null}>
-          <EffectComposer multisampling={0}>
-            <Glitch
-              delay={[1.5, 3.5]} // min and max glitch delay
-              duration={[0.6, 1.0]} // min and max glitch duration
-              strength={[0.3, 1.0]} // min and max glitch strength
-              active // turn on/off the effect (switches between "mode" prop and GlitchMode.DISABLED)
-              ratio={1}
-            />
-            <SMAA />
-            <ToneMapping
-              blendFunction={BlendFunction.COLOR_BURN} // blend mode
-              adaptive={true} // toggle adaptive luminance map usage
-              resolution={256} // texture resolution of the luminance map
-              middleGrey={1} // middle grey factor
-              maxLuminance={26.0} // maximum luminance
-              averageLuminance={2} // average luminance
-              adaptationRate={2} // luminance adaptation rate
-            />
-          </EffectComposer>
-        </Suspense>
+          <Stats />
 
-        <LightTrail />
+          <Suspense fallback={null}>
+            <EffectComposer multisampling={0}>
+              <Glitch
+                delay={[1.5, 3.5]} // min and max glitch delay
+                duration={[0.6, 1.0]} // min and max glitch duration
+                strength={[0.3, 1.0]} // min and max glitch strength
+                active // turn on/off the effect (switches between "mode" prop and GlitchMode.DISABLED)
+                ratio={1}
+              />
+              <SMAA />
+              <ToneMapping
+                blendFunction={BlendFunction.COLOR_BURN} // blend mode
+                adaptive={true} // toggle adaptive luminance map usage
+                resolution={256} // texture resolution of the luminance map
+                middleGrey={1} // middle grey factor
+                maxLuminance={26.0} // maximum luminance
+                averageLuminance={2} // average luminance
+                adaptationRate={2} // luminance adaptation rate
+              />
+            </EffectComposer>
+          </Suspense>
 
-        <OrbitControls enableZoom={false} enablePan={false} />
-      </Canvas>
-    </div>
+          <OrbitControls enableZoom={false} enablePan={false} />
+        </Canvas>
+      </div>
+    </>
   );
 }
