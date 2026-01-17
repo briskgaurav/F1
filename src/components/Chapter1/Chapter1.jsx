@@ -129,7 +129,6 @@ export default function Chapter1() {
             position: [0, 0, 5],
           }}
         >
-          <Stats />
           <LightTrail />
         </Canvas>
       </div>
