@@ -1,20 +1,16 @@
-import { Geist, Geist_Mono, Archivo } from "next/font/google";
+import { Jura, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import LenisSmoothScroll from "@/components/Lenis/Lenis";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const jura = Jura({
+  variable: "--font-jura",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-ibm-plex-mono",
   subsets: ["latin"],
-});
-
-const archivo = Archivo({
-  variable: "--font-archivo",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata = {
@@ -27,7 +23,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <LenisSmoothScroll />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${archivo.variable} antialiased`}
+        className={`${jura.variable} ${ibmPlexMono.variable} antialiased`}
       >
         {children}
       </body>

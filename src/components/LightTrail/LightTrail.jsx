@@ -193,7 +193,7 @@ const displayFragmentShader = `
 // Standalone component that renders to its own canvas (not affected by R3F postprocessing)
 export default function LightTrail({
   colorMix: defaultColorMix = 0.5,
-  tint: defaultTint = new THREE.Color(0xf70000),
+  tint: defaultTint = new THREE.Color("#aaaaaa"),
   decay: defaultDecay = 0.80,
   diffusion: defaultDiffusion = 3.7,
   lightningWidth: defaultLightningWidth = 0.09,

@@ -9,13 +9,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-red: #fd1812;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-archivo: var(--font-archivo);
-}
-
-.font-archivo {
-  font-family: var(--font-archivo);
+  --font-sans: var(--font-jura);
+  --font-IBM-mono: var(--font-ibm-plex-mono);
 }
 
 
@@ -33,13 +28,14 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-archivo);
+  font-family: var(--font-IBM-mono);
 }
 
 .bigtext{
-  font-family: var(--font-archivo);
-  font-size: 7vw;
+  font-family: var(--font-jura);
+  font-size: 10vw;
   line-height: 1;
-  color: #ffffff;
+  color: #FF1812;
+  font-weight: 700;
   /* text-transform: capitalize; */
 }

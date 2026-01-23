@@ -9,11 +9,9 @@ export default function page() {
     <>
       <ScrollBarCustom />
       <section id="chapter1" className="h-[300vh] relative w-screen bg-black">
-
-
-          <Chapter1 />
-        {/* <Chapter1Layout /> */}
-      </section>  
+        <Chapter1 />
+        <Chapter1Layout />
+      </section>
     </>
   );
 }

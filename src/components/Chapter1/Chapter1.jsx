@@ -21,6 +21,7 @@ import {
   ToneMapping,
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
+import LightTrail from "../LightTrail/LightTrail";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,7 +48,7 @@ export default function Chapter1() {
   return (
     <div className="fixed inset-0 w-full h-screen bg-black flex items-center justify-center overflow-hidden">
    
-      {/* <LightTrail /> */}
+      <LightTrail />
 
       <Canvas
         flat
@@ -83,7 +84,7 @@ export default function Chapter1() {
 
         <Environment preset="sunset" />
 
-        <Stats />
+        {/* <Stats /> */}
 
         <Suspense fallback={null}>
           <EffectComposer multisampling={0}>
