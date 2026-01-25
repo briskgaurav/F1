@@ -6,8 +6,8 @@ import * as THREE from 'three'
 const lerp = (start, end, factor) => start + (end - start) * factor
 
 const CONFIG = {
-  baseRadius: 0.35,
-  scrollBoost: 0.2,
+  baseRadius: 0.25,
+  scrollBoost: 1.2,
   baseSize: 0.4,
   color: [1.0, 0.0, 0.0],
   gridSpacing: 10.0,
