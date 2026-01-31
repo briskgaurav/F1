@@ -1,47 +1,27 @@
-"use client"
-import React, { useEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { SplitText } from 'gsap/SplitText'
-
-gsap.registerPlugin(ScrollTrigger, SplitText)
+import React from 'react'
 
 export default function Chapter1Layout() {
-  const containerRef = useRef(null)
-  const textRef = useRef(null)
-
-  useEffect(() => {
-    const split = new SplitText(textRef.current, { type: "chars" ,mask:'chars'})
-    const chars = split.chars
-
-    gsap.to(chars, {
-      xPercent: 100,
-      ease: "none",
-      scrollTrigger: {
-        trigger: '#Chap1Layout',
-        start: "top 0%",
-        end: "20% top",
-        markers: false,
-        scrub: true,
-      }
-    })
-
-    return () => {
-      split.revert()
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-    }
-  }, [])
-
   return (
-    <section id='Chap1Layout' className='h-screen w-full py-[5vh] flex px-[5vw] flex-col items-end justify-end absolute top-0 left-0'>
-      <div ref={containerRef} className='fixed bigtext tracking-[4vw] top-[45%] left-0 w-full h-fit -translate-y-1/2 flex justify-evenly'>
-        <span ref={textRef}>LIMITLESS</span>
-      </div>
+    <div className='w-full absolute inset-0'>
+      <section className='h-screen w-full px-[4vw] flex flex-col justify-between'>
+        <div className='mt-[20vh] w-fit'>
+          <h1 className=' uppercase bigtext tracking-tighter'>\_Break</h1>
+          <p className='text-[1.2vw] font-IBM-mono uppercase leading-none mt-[-3vh] tracking-widest text-right'>CONCEPT BY CRAZY DEVS</p>
+          <h2 className=' uppercase bigtext tracking-tighter'>Limits</h2>
+        </div>
 
-      <div className=' font-IBM-mono uppercase text-[1.1vw] w-[25vw] text-justify text-[#E8F2F8]'>
-        Speed is not just movement, it's an experience shaped by physics.Every force, every motion, and every reaction pushes the boundaries of what's possible.
-      </div>
+        <div className='w-full h-[20vh] flex items-center justify-between'>
+          <p className='text-[1.2vw] font-IBM-mono uppercase leading-tight w-[13%] text-justify'>SCROLL TO FEEL THE SPEED ⌄</p>
+          <p className='text-[1.2vw] font-IBM-mono uppercase leading-tight w-[25%] text-justify'>Speed isn't just movement it's an experience shaped by physics. Every force and motion pushes what's possible.</p>
+        </div>
+      </section>
 
-    </section>
+      <section className='h-screen w-full px-[4vw] flex flex-col justify-between'>
+        <div className='w-fit mt-[20vh] ml-auto text-right '>
+          <h2 className=' uppercase bigtext tracking-tighter'>crafted</h2>
+          <h2 className=' uppercase bigtext tracking-tighter'>for - air</h2>
+        </div>
+      </section>
+    </div>
   )
 }
