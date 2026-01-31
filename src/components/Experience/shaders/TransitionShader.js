@@ -61,7 +61,7 @@ const fragmentShader = `
     
     // Icy distortion based on noise
     float iceNoise = fbm(uv * 8.0 + uTime * 0.1);
-    float iceDistort = (iceNoise - 0.5) * 0.03 * p * (1.0 - p) * 4.0;
+    float iceDistort = (iceNoise - 0.5) * 0.015 * p * (1.0 - p) * 4.0;
     
     // Vertical stretch with ice-like warping
     vec2 distortedUV = uv;
@@ -71,21 +71,21 @@ const fragmentShader = `
     // Motion blur samples
     vec4 col1 = vec4(0.0);
     vec4 col2 = vec4(0.0);
-    float samples = 16.0;
-    float blur = p * (1.0 - p) * uStrength;
+    float samples = 8.0;
+    float blur = p * (1.0 - p) * uStrength * 0.3;
     
     // Chromatic aberration amount based on progress
-    float chromaAmount = p * (1.0 - p) * 0.015;
+    float chromaAmount = p * (1.0 - p) * 0.008;
     
-    for(float i = 0.0; i < 16.0; i++) {
+    for(float i = 0.0; i < 8.0; i++) {
       float t = i / samples;
       float offset = (t - 0.5) * blur;
       
       // Add horizontal motion blur component
-      float hOffset = (t - 0.5) * blur * 0.3;
+      float hOffset = (t - 0.5) * blur * 0.15;
       
-      vec2 uv1 = distortedUV + vec2(hOffset, offset - p * 0.5);
-      vec2 uv2 = distortedUV + vec2(hOffset, offset - (1.0 - p) * 0.5);
+      vec2 uv1 = distortedUV + vec2(hOffset, offset - p * 0.15);
+      vec2 uv2 = distortedUV + vec2(hOffset, offset - (1.0 - p) * 0.15);
       
       // Sample with chromatic aberration for icy color shifts
       col1 += chromaticAberration(uPrev, uv1, chromaAmount * (1.0 + t));

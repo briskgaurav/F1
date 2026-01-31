@@ -4,9 +4,9 @@ export default function Chapter1Layout() {
   return (
     <div className='w-full absolute inset-0'>
       <section className='h-screen w-full px-[4vw] flex flex-col justify-between'>
-        <div className='mt-[20vh] w-fit'>
+        <div className='mt-[20vh] relative w-fit'>
           <h1 className=' uppercase bigtext tracking-tighter'>\_Break</h1>
-          <p className='text-[1.2vw] font-IBM-mono uppercase leading-none mt-[-3vh] tracking-widest text-right'>CONCEPT BY CRAZY DEVS</p>
+          <p className='text-[1.2vw] font-IBM-mono uppercase leading-none absolute bottom-0 top-[8vw] left-[12vw] tracking-widest text-right'>CONCEPT BY CRAZY DEVS</p>
           <h2 className=' uppercase bigtext tracking-tighter'>Limits</h2>
         </div>
 

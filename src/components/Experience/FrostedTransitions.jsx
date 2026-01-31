@@ -1,7 +1,7 @@
 'use client'
 import React, { useRef, useEffect, useState, Suspense } from 'react'
 import { Canvas, useFrame, createPortal, useThree } from '@react-three/fiber'
-import { useFBO, PerspectiveCamera, Stats } from '@react-three/drei'
+import { useFBO, PerspectiveCamera, Stats, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -168,55 +168,49 @@ export default function FrostedTransition({
         })
 
         // Transition 2: Scene 1 → Scene 2 (20% to 25%)
-        const transition2 = ScrollTrigger.create({
-            trigger: wrapperRef.current,
-            start: '25% top',
-            end: '32% top',
-            scrub: true,
-            onUpdate: (self) => {
-                // Progress 0 to 1 maps to scene index 1 to 2
-                setCurrentSceneIndex(1 + self.progress)
-            },
-            markers: false,
-        })
+        // const transition2 = ScrollTrigger.create({
+        //     trigger: wrapperRef.current,
+        //     start: '25% top',
+        //     end: '32% top',
+        //     scrub: true,
+        //     onUpdate: (self) => {
+        //         setCurrentSceneIndex(1 + self.progress)
+        //     },
+        //     markers: false,
+        // })
 
-        // Transition 3: Scene 2 → Scene 3 (50% to 55%)
-        const transition3 = ScrollTrigger.create({
-            trigger: wrapperRef.current,
-            start: '50% top',
-            end: '55% top',
-            scrub: true,
-            onUpdate: (self) => {
-                // Progress 0 to 1 maps to scene index 2 to 3
-                setCurrentSceneIndex(2 + self.progress)
-            },
-            markers: false,
-        })
+        // const transition3 = ScrollTrigger.create({
+        //     trigger: wrapperRef.current,
+        //     start: '50% top',
+        //     end: '55% top',
+        //     scrub: true,
+        //     onUpdate: (self) => {
+        //         setCurrentSceneIndex(2 + self.progress)
+        //     },
+        //     markers: false,
+        // })
 
-        // Transition 4: Scene 3 → Scene 4 (you can set custom percentages)
-        const transition4 = ScrollTrigger.create({
-            trigger: wrapperRef.current,
-            start: '70% top',
-            end: '75% top',
-            scrub: true,
-            onUpdate: (self) => {
-                setCurrentSceneIndex(3 + self.progress)
-            },
-            markers: false,
-        })
+        // const transition4 = ScrollTrigger.create({
+        //     trigger: wrapperRef.current,
+        //     start: '70% top',
+        //     end: '75% top',
+        //     scrub: true,
+        //     onUpdate: (self) => {
+        //         setCurrentSceneIndex(3 + self.progress)
+        //     },
+        //     markers: false,
+        // })
 
-        // Transition 5: Scene 4 → Scene 5 (you can set custom percentages)
-        const transition5 = ScrollTrigger.create({
-            trigger: wrapperRef.current,
-            start: '85% top',
-            end: '90% top',
-            scrub: true,
-            onUpdate: (self) => {
-                setCurrentSceneIndex(4 + self.progress)
-            },
-            markers: false,
-        })
-
+        // const transition5 = ScrollTrigger.create({
+        //     trigger: wrapperRef.current,
+        //     start: '85% top',
+        //     end: '90% top',
+        //     scrub: true,
+        //     onUpdate: (self) => {
+        //         setCurrentSceneIndex(4 + self.progress)
+        //     },
+        //     markers: false,
+        // })
 
     }, [])
 
