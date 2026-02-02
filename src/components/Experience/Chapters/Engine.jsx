@@ -2,10 +2,10 @@
 import React, { useRef, useEffect } from "react";
 import { Center, Environment, ContactShadows, Lightformer } from "@react-three/drei";
 import * as THREE from "three";
-import V6Enigine from "../Models/V6Enigine";
 import { degToRad } from "three/src/math/MathUtils";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import V6Enigine from "../Models/V6Enigine";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,25 +76,22 @@ export default function Engine() {
       <group ref={pivotRef}>
         <Center>
           <group ref={modelRef}>
-            <V6Enigine 
-              electricEffect={true}
-              electricColor={new THREE.Color(1.0, 0.1, 0.05)} // Red electric
-              electricIntensity={2.0}
-              gridScale={10.0}
-              blendMode={0.15} // More electric, less texture
+            <V6Enigine
+              electricEffect={false}
+              electricColor={new THREE.Color(1.0, 1.0, 1.0)} // Red electric
+              electricIntensity={.5}
+              gridScale={5.0}
+              blendMode={.3} // More electric, less texture
             />
           </group>
         </Center>
       </group>
 
-      {/* Contact shadows for grounding */}
-      <ContactShadows
-        position={[0, -2, 0]}
-        opacity={0.1}
-        blur={2.5}
-        far={2}
-        color="#ff2200"
-      />
+      
+
+      {/* <Environment preset="studio" environmentIntensity={.5} /> */}
+
+
 
     
     </>

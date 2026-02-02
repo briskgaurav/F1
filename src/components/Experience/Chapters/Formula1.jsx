@@ -1,5 +1,5 @@
 "use client";
-import { Center, Environment } from "@react-three/drei";
+import { Center } from "@react-three/drei";
 import React, { useRef, useEffect } from "react";
 import { F1Model } from "../F1Model";
 import { degToRad } from "three/src/math/MathUtils";
@@ -53,7 +53,7 @@ export default function Formula1({ MainModelRef }) {
         </group>
       </Center>
 
-      <Environment preset="sunset" />
+
     </>
   );
 }

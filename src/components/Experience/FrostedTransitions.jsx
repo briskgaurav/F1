@@ -166,7 +166,7 @@ export default function FrostedTransition({
             },
             markers: false,
         })
-
+        // https://sketchfab.com/3d-models/supercharged-sbc-v8-engine-revised-582d3f69b0f7460ea0e7d091bdf1f778
         // Transition 2: Scene 1 → Scene 2 (20% to 25%)
         // const transition2 = ScrollTrigger.create({
         //     trigger: wrapperRef.current,

@@ -12,8 +12,9 @@ const ElectricModelMaterial = shaderMaterial(
     uIntensity: 1.0,
     uGridScale: 8.0,
     uGridLineScale: 0.1,
-    uElectricPower: 7.0,
+    uElectricPower: 10.0,
     uBlendMode: 0.5, // 0 = only electric, 1 = only texture
+    uContrast: 19.0,
   },
   // Vertex shader
   `
@@ -40,6 +41,7 @@ const ElectricModelMaterial = shaderMaterial(
     uniform float uGridLineScale;
     uniform float uElectricPower;
     uniform float uBlendMode;
+    uniform float uContrast;
     
     varying vec2 vUv;
     varying vec3 vNormal;
@@ -66,31 +68,44 @@ const ElectricModelMaterial = shaderMaterial(
       return minDistance;
     }
     
+    // Contrast adjustment function
+    vec3 adjustContrast(vec3 color, float contrast) {
+      return (color - 0.5) * contrast + 0.5;
+    }
+    
     void main() {
       // Sample original texture
       vec4 texColor = texture2D(uMap, vUv);
       
-      // Calculate Voronoi electric effect
-      vec2 uv = vUv;
-      float val = pow(voronoi(uv * uGridScale, uTime) * 1.25, uElectricPower) * 2.0;
+      // Apply contrast to texture
+      vec3 contrastedTex = adjustContrast(texColor.rgb, uContrast);
+      contrastedTex = clamp(contrastedTex, 0.0, 1.0);
       
-      // Grid lines
-      float gridLineThickness = 0.02;
+      // Calculate Voronoi electric effect with sharper falloff
+      vec2 uv = vUv;
+      float val = pow(voronoi(uv * uGridScale, uTime) * 1.5, uElectricPower) * 3.0;
+      
+      // Grid lines with sharper edges
+      float gridLineThickness = 0.015;
       vec2 grid = step(mod(uv, uGridLineScale), vec2(gridLineThickness));
       float gridEffect = grid.x + grid.y;
       
-      // Electric color with grid
-      vec3 electricColor = uColor * val * (1.0 + gridEffect * 0.5);
+      // Electric color with grid - increased brightness
+      vec3 electricColor = uColor * val * (1.0 + gridEffect * 0.8);
       electricColor *= uIntensity;
       
-      // Fresnel for edge glow
+      // Sharper fresnel for edge glow
       vec3 viewDir = normalize(cameraPosition - vWorldPosition);
-      float fresnel = pow(1.0 - abs(dot(viewDir, vNormal)), 2.0);
-      electricColor += uColor * fresnel * 0.5;
+      float fresnel = pow(1.0 - abs(dot(viewDir, vNormal)), 3.0);
+      electricColor += uColor * fresnel * 0.8;
       
       // Blend texture with electric effect
-      vec3 finalColor = mix(electricColor, texColor.rgb, uBlendMode);
+      vec3 finalColor = mix(electricColor, contrastedTex, uBlendMode);
       finalColor += electricColor * (1.0 - uBlendMode);
+      
+      // Final contrast boost
+      finalColor = adjustContrast(finalColor, 1.2);
+      finalColor = clamp(finalColor, 0.0, 1.0);
       
       gl_FragColor = vec4(finalColor, texColor.a);
     }

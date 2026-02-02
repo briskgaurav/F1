@@ -6,74 +6,46 @@ Source: https://sketchfab.com/3d-models/f6-boxer-engine-5700259eeb494b8f8a0b8f63
 Title: F6 Boxer Engine
 */
 
-import React, { forwardRef, useRef, useMemo } from 'react'
+import React, { forwardRef, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
 import { degToRad } from 'three/src/math/MathUtils'
 import * as THREE from 'three'
-import '../shaders/ElectricModelMaterial'
+import RichetMaterial from '../shaders/HologramShader'
 
-// Electric mesh component that applies the shader
-function ElectricMesh({ geometry, material, electricColor, intensity, gridScale, blendMode }) {
+// Hologram mesh component that applies the shader
+function HologramMesh({ geometry }) {
     const meshRef = useRef()
-    const materialRef = useRef()
-    
-    // Get texture from original material with proper settings
-    const texture = useMemo(() => {
-        if (material.map) {
-            // Clone the texture to avoid modifying the original
-            const tex = material.map.clone()
-            tex.needsUpdate = true
-            tex.colorSpace = THREE.SRGBColorSpace
-            tex.minFilter = THREE.LinearMipmapLinearFilter
-            tex.magFilter = THREE.LinearFilter
-            tex.anisotropy = 16
-            return tex
-        }
-        // Create a simple color texture if no map exists
-        const canvas = document.createElement('canvas')
-        canvas.width = 64
-        canvas.height = 64
-        const ctx = canvas.getContext('2d')
-        const color = material.color || new THREE.Color(0.5, 0.5, 0.5)
-        ctx.fillStyle = `rgb(${Math.round(color.r * 255)}, ${Math.round(color.g * 255)}, ${Math.round(color.b * 255)})`
-        ctx.fillRect(0, 0, 64, 64)
-        const tex = new THREE.CanvasTexture(canvas)
-        tex.colorSpace = THREE.SRGBColorSpace
-        tex.needsUpdate = true
-        return tex
-    }, [material])
-    
-    useFrame((state) => {
-        if (materialRef.current) {
-            materialRef.current.uTime = state.clock.elapsedTime
-        }
-    })
     
     return (
         <mesh ref={meshRef} geometry={geometry} castShadow receiveShadow>
-            <electricModelMaterial
-                ref={materialRef}
-                uMap={texture}
-                uColor={electricColor}
-                uIntensity={intensity}
-                uGridScale={gridScale}
-                uGridLineScale={0.1}
-                uElectricPower={7.0}
-                uBlendMode={blendMode}
-                transparent={false}
-                side={THREE.DoubleSide}
+            <RichetMaterial
+               
+                hologramBrightness={0.}
+                hologramOpacity={0.4}
+                fresnelOpacity={0.}
+                fresnelAmount={1.2}
+                scanlineSize={2.0}
+                scanlineSpeed={0.45}
+                enableGrid={true}
+                gridSize={3.0}
+                brightness={1.0}
+                blackPatchScale={0}
+                gridLineWidth={2.0}
+                enableHexPattern={true}
+                enableDataStreams={true}
+                enablePulseWaves={true}
+                contrast={0.2}
+                pulseSpeed={1.0}
+                wireframeIntensity={0.}
+                glitchIntensity={0}
+                chromaticStrength={0.}
             />
         </mesh>
     )
 }
 
 const V6Enigine = forwardRef(function V6Enigine({ 
-    electricEffect = true,
-    electricColor = new THREE.Color(0.0, 1.0, 0.4),
-    electricIntensity = 1.5,
-    gridScale = 10.0,
-    blendMode = 0.5,
+    hologramEffect = true,
     ...props 
 }, ref) {
     const { nodes, materials } = useGLTF('/model/f6_boxer_engine.glb')
@@ -107,17 +79,12 @@ const V6Enigine = forwardRef(function V6Enigine({
         <group ref={ref}>
             <group scale={0.2} position={[0, 0, 0]} rotation={[0, degToRad(90), 0]} {...props} dispose={null}>
                 <group rotation={[-Math.PI / 2, 0, 0]}>
-                    {electricEffect ? (
-                        // Render with electric shader
+                    {hologramEffect ? (
+                        // Render with hologram shader
                         meshConfigs.map((config, i) => (
-                            <ElectricMesh
+                            <HologramMesh
                                 key={i}
                                 geometry={config.geometry}
-                                material={config.material}
-                                electricColor={electricColor}
-                                intensity={electricIntensity}
-                                gridScale={gridScale}
-                                blendMode={blendMode}
                             />
                         ))
                     ) : (
